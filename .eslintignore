@@ -1,0 +1,9 @@
+/assembly
+/babel_cache
+/config/themes
+/dist
+/node_modules
+/res
+/api-spec
+/src/api/generated
+/*.*
