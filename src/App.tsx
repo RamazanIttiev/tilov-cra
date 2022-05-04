@@ -1,5 +1,9 @@
 import React from 'react';
 
 export const App = () => {
-	return <div className="App"></div>;
+	return (
+		<form action="/create-checkout-session" method="POST">
+			<button type="submit">Checkout</button>
+		</form>
+	);
 };

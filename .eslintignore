@@ -6,4 +6,4 @@
 /res
 /api-spec
 /src/api/generated
-/*.*
+/*.*!/.env
