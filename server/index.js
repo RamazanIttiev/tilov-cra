@@ -1,36 +1,33 @@
-import dotenv from 'dotenv';
-
-import cors from 'cors';
 import Stripe from 'stripe';
-import express from 'express';
-import { PORT, YOUR_DOMAIN } from './utils.js';
+import dotenv from 'dotenv';
+import express, { json } from 'express';
 
-const app = express();
 dotenv.config({ path: './.env' });
 
 const stripe = new Stripe(process.env.PRIVATE_STRIPE_KEY, {
 	apiVersion: '2020-08-27',
 });
 
-app.use(cors());
+const app = express();
+
+app.use(json());
 app.use(express.static('public'));
 
-app.post('/create-checkout-session', async (req, res) => {
-	console.log(req);
+const calculateOrderAmount = items => {
+	return 10000 || items;
+};
 
-	const session = await stripe.checkout.sessions.create({
-		line_items: [
-			{
-				price: 'price_1KsR75A3FxV88R1ixXh9pCBu',
-				quantity: 1,
-			},
-		],
-		mode: 'payment',
-		success_url: `${YOUR_DOMAIN}?successful_payment`,
-		cancel_url: `${YOUR_DOMAIN}?canceled_payment`,
+app.post('/create-payment-intent', async (req, res) => {
+	const { items } = req.body;
+
+	const paymentIntent = await stripe.paymentIntents.create({
+		amount: calculateOrderAmount(items),
+		currency: 'rub',
 	});
 
-	return res.redirect(303, session.url);
+	res.send({
+		clientSecret: paymentIntent.client_secret,
+	});
 });
 
-app.listen(PORT, () => console.log(`Running on port ${PORT}`));
+app.listen(4242, () => console.log('Node server listening on port 4242!'));
