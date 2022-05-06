@@ -25,7 +25,7 @@ export const PaymentForm: FC<PaymentFormProps> = ({ message, isLoading, handleLo
 		const { error } = await stripe.confirmPayment({
 			elements,
 			confirmParams: {
-				return_url: 'http://localhost:3000/',
+				return_url: 'http://ramazz1g.beget.tech/',
 			},
 		});
 

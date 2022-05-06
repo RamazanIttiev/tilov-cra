@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "homepage": "http://localhost:3000",
-  "proxy": "http://localhost:4242",
+  "homepage": "http://ramazz1g.beget.tech",
+  "proxy": "http://ramazz1g.beget.tech",
   "dependencies": {
     "@emailjs/browser": "^3.4.0",
     "@emotion/react": "^11.7.1",
